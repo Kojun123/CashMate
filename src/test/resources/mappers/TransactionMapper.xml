@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<mapper namespace="com.yourapp.mapper.TransactionMapper">
+
+    <resultMap id="TransactionMap" type="com.yourapp.domain.Transaction">
+        <id     property="id"                 column="id" />
+        <result property="accountCategoryId"  column="account_category_id" />
+        <result property="amount"             column="amount" />
+        <result property="note"               column="note" />
+        <result property="transDate"          column="trans_date" />
+        <result property="createdAt"          column="created_at" />
+        <result property="updatedAt"          column="updated_at" />
+    </resultMap>
+
+    <select id="findAll" resultMap="TransactionMap">
+        SELECT
+        id
+        , account_category_id
+        , amount
+        , note
+        , trans_date
+        , created_at
+        , updated_at
+        FROM transaction
+        ORDER BY trans_date DESC
+    </select>
+
+    <insert id="insert" parameterType="com.yourapp.domain.Transaction">
+        INSERT INTO transaction(
+        account_category_id
+        , amount
+        , note
+        , trans_date
+        )
+        VALUES(
+        #{accountCategoryId}
+        , #{amount}
+        , #{note}
+        , #{transDate}
+        )
+    </insert>
+
+</mapper>
